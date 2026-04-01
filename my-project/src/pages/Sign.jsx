@@ -33,21 +33,31 @@ function Sign() {
       );
 
       if (data.statusCode == 200) {
-        alert("User registered successfully");
+        toast.success('Success! Going Home Page...')
         saveToken(data.data);
         navigate('/')
-      } else {
-        alert("Registration failed: " + (data.message || "Unknown error"));
+      } 
+      else if(data.statusCode == 400) {
+    toast.error("Wrong data. Please make sure all fields are filled correctly and passwords match.")
+      } 
+      else if(data.statusCode == 500){
+        toast.error("Server error. Please try again later.")
+      }
+      else if(data.statusCode == 404){
+        toast.error("Endpoint not found. Please contact support.")
+      }
+      else {
+        toast.error("Registration failed: " + (data.message || "Unknown error"));
       }
     } catch (error) {
       console.log("Full error:", error);
       console.log("Error response:", error.response?.data);
       const errorMessage = error.response?.data?.message || error.response?.data?.errors || "Registration failed";
-      alert("Error: " + JSON.stringify(errorMessage));
+      toast.error("Error: " + JSON.stringify(errorMessage));
     }
   };
   return (
-     <div className="flex items-end justify-center p-30">
+     <div className="flex items-end justify-center p-5 lg:p-30">
       <form onSubmit={handleSubmit} className="flex flex-col">
         <p className="text-4xl font-semibold">Create an account</p>
         <br />
@@ -107,7 +117,7 @@ function Sign() {
             color="warning"
             variant="contained"
           >
-            Login
+            REGISTER
           </Button>
 
           <img className="cursor-pointer" src={img5} alt="" />

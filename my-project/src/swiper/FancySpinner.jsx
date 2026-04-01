@@ -2,6 +2,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import img3 from "../assets/hero_endframe__cvklg0xk3w6e_large 2.png";
 import img4 from "../assets/4.png";
+import img13 from "../assets/13.png";
+import img14 from "../assets/14.png";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
@@ -10,20 +12,20 @@ function FancySpinner() {
     {
       id: 1,
       title: "Up to 10% off Voucher",
-      subtitle: "iPhone 14 Series",
+      subtitle: "iPhone 14 Pro Max",
       img: img3,
     },
     {
       id: 2,
       title: "Big Sale 15%",
-      subtitle: "iPhone 13",
-      img: img3,
+      subtitle: "iPhone 16 Pro MAX",
+      img: img13,
     },
     {
       id: 3,
       title: "New iPhone Deals",
-      subtitle: "iPhone 15",
-      img: img3,
+      subtitle: "iPhone 17 Pro MAX",
+      img: img14,
     },
   ];
 

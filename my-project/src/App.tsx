@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast';
 import './App.css'
 // @ts-ignore
 
@@ -31,6 +32,8 @@ import Sign from '@/pages/Sign'
 
 function App() {
   return (
+    <>
+               <Toaster />
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
@@ -49,6 +52,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </>
   )
 }
 

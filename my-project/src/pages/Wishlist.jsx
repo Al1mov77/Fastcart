@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react"
-
+import {Button} from "@mui/material"
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
 function Wishlist() {
+  const navigate = useNavigate()
+  const notify = () => toast("Success!");
   const [wishlist, setWishlist] = useState([])
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("wishlist"))
@@ -14,11 +18,11 @@ function Wishlist() {
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Wishlist</h1>
+    <div>
+      <h1 className="text-2xl font-bold mb-6 text-center">Wishlist</h1>
 
       {wishlist.length > 0 ? (
-        <div className="grid grid-cols-4 gap-6">
+        <div className="flex flex-wrap gap-6 justify-center w-40 mx-auto">
           {wishlist.map((item) => (
             <div
               key={item.id}
@@ -35,7 +39,7 @@ function Wishlist() {
                 alt={item.name}
                 className="w-full h-40 object-contain mb-4"
               />
-              <h2 className="text-sm font-semibold">{item.name}</h2>
+              <h2 className="text-sm font-semibold">{item.productName}</h2>
               <p className="text-red-500 font-bold mt-2">${item.price}</p>
             </div>
           ))}
@@ -45,6 +49,16 @@ function Wishlist() {
           Your wishlist is empty 
         </p>
       )}
+      <div className="flex mt-10 items-center justify-center">
+      <Button onClick={() =>{
+        toast.success('Success! Back Home Page...')
+        localStorage.removeItem("wishlist")
+        setTimeout(() => {
+navigate("/")
+        }, 1500);
+      }} color="warning" variant="contained">Clear wishlist</Button>
+      </div>
+      
     </div>
   )
 }
