@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useTodo } from "./ProductsApi/Create"
 import { Link } from "react-router-dom"
+import toast from "react-hot-toast"
 import { Button } from "@mui/material"
 
 /**
@@ -44,6 +45,7 @@ export default function AllProducts() {
 
     localStorage.setItem("wishlist", JSON.stringify(updated))
     setWishlist(updated)
+    toast.success("Wishlist updated!")
   }
 
   const addToCart = (product) => {
@@ -57,12 +59,15 @@ export default function AllProducts() {
 
     if (exists) {
       updated = saved.map(item =>
-        item.id === product.id
+        item.id == product.id
           ? { ...item, quantity: (item.quantity || 1) + 1 }
           : item
+          
       )
+      toast.error("Cart temporarily not working!")
     } else {
       updated = [...saved, { ...product, quantity: 1 }]
+      toast.error("Cart temporarily not working!")
     }
 
     localStorage.setItem("cart", JSON.stringify(updated))
