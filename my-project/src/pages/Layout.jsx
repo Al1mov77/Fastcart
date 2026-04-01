@@ -54,7 +54,7 @@ export default function Layout() {
             <Link to="/sign"><p>Sign Up</p></Link>
           </div>
 
-          <div className='flex gap-5 items-center ml-3 mt-2'>
+          <div className='flex gap-1.5 items-center ml-3 mt-2'>
             <div className='hidden sm:block'>
               <InputGroup className="max-w-xs">
                 <InputGroupInput placeholder="Search..." />
@@ -66,7 +66,6 @@ export default function Layout() {
                 <InputGroupAddon align="inline-end">What are you looking for?</InputGroupAddon>
               </InputGroup>
             </div>
-
             <div className='flex items-center mt-1.5'>
               <Link to="wishlist">
                 <button className='cursor-pointer' onClick={toggleLike}>
