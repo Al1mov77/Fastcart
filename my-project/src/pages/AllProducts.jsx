@@ -110,7 +110,7 @@ export default function AllProducts() {
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4 md:p-6 min-h-screen bg-white">
-      <aside className="w-full md:w-64 flex-shrink-0">
+      <aside className="w-full md:w-64">
         <div className="space-y-6">
           <div>
             <h3 className="font-bold text-lg mb-4">Category</h3>
