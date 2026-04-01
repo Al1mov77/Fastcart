@@ -1,0 +1,8 @@
+export default function Account() {
+  return (
+    <div>
+      <h1>Account Page</h1>
+      <p>App.tsx router dom</p>
+    </div>
+  )
+}
