@@ -135,4 +135,16 @@
 body{
   max-width: 1600px;
   margin: auto;
+    background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+:root {
+  --bg-color: white;
+  --text-color: black;
+}
+
+html.dark {
+  --bg-color: #0d0c2e;
+  --text-color: white;
 }
