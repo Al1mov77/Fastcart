@@ -16,13 +16,25 @@ function Home() {
         getData()
     },[])
 
-    const toggleWishlist = (id) => {
-        setWishlist(prev => ({
-            ...prev,
-            [id]: !prev[id]
-        }))
-       localStorage.setItem("wishlike", JSON.stringify(wishlist))
+    const toggleWishlist = (product) => {
+    const saved = JSON.parse(
+      localStorage.getItem("wishlist") || "[]"
+    )
+
+    const exists = saved.find(item => item.id == product.id)
+
+    let updated
+
+    if (exists) {
+      updated = saved.filter(item => item.id !== product.id)
+    } else {
+      updated = [...saved, product]
     }
+
+    localStorage.setItem("wishlist", JSON.stringify(updated))
+    setWishlist(updated)
+    toast.success("Wishlist updated!")
+  }
   return (
     <>
     
@@ -66,7 +78,7 @@ function Home() {
                         <button 
                             onClick={(e) => {
                                 e.preventDefault()
-                                toggleWishlist(prod.id)
+                                toggleWishlist(prod)
                             }}
                             className="bg-white rounded-full p-2 hover:bg-gray-200 transition"
                         >
@@ -271,7 +283,7 @@ function Home() {
                  <button 
                    onClick={(e) => {
                      e.preventDefault()
-                     toggleWishlist(prod.id)
+                     toggleWishlist(prod)
                    }}
                    className="bg-white rounded-full p-2 hover:bg-gray-200 transition"
                  >

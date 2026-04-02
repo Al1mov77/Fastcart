@@ -19,7 +19,7 @@ export const useTodo = create((set,get) =>({
     infoData: async (id) =>{
        try {
         const {data} = await axios.get(`${API}/Product/get-product-by-id?id=${id}`)
-        set({product:data.data})
+         set({ cart: data.data[0]?.productsInCart || [] });
         console.log(data);
         
        } catch (error) {
@@ -28,26 +28,115 @@ export const useTodo = create((set,get) =>({
     },
    
   addCartt: async (prod) => {
-    try {
-      const token = getToken(); 
-      await axios.post(
-        `https://store-api.softclub.tj/Cart/add-product-to-cart?id=${prod.id}`);
-      get().getCart();
-    } catch (error) {
-      console.error(error);
-    }
-  },
+  try {
+    const token = getToken();
+
+    await axios.post(
+      `https://store-api.softclub.tj/Cart/add-product-to-cart?id=${prod.id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    get().getCart();
+  } catch (error) {
+    console.error(error);
+  }
+},
 
   getCart: async () => {
   try {
     const token = getToken()
-    const { data } = await axios.get(
-      `https://store-api.softclub.tj/Cart/get-products-from-cart`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    )
-    set({ cart: data.data })
+   const { data } = await axios.get(
+  `https://store-api.softclub.tj/Cart/get-products-from-cart`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+set({ cart: data.data[0].productsInCart })
+console.log(data);
+
   } catch (error) {
     console.error(error)
+  }
+},
+reduceCart: async (prod) => {
+  try {
+    const token = getToken();
+
+    await axios.put(
+      `https://store-api.softclub.tj/Cart/reduce-product-in-cart?id=${prod.id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    get().getCart();
+  } catch (error) {
+    console.error(error);
+  }
+},
+increaseCart: async (prod) => {
+  try {
+    const token = getToken();
+
+    await axios.put(
+      `https://store-api.softclub.tj/Cart/increase-product-in-cart?id=${prod.id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    get().getCart();
+  } catch (error) {
+    console.error(error);
+  }
+},
+deleteItem: async (id) => {
+  try {
+    const token = getToken();
+
+    await axios.delete(
+      `https://store-api.softclub.tj/Cart/delete-product-from-cart?id=${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    get().getCart();
+  } catch (error) {
+    console.error(error);
+  }
+},
+clearCart: async () => {
+  try {
+    const token = getToken();
+
+    await axios.delete(
+      `https://store-api.softclub.tj/Cart/clear-cart`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    get().getCart();
+  } catch (error) {
+    console.error(error);
   }
 }
 }))

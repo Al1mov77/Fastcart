@@ -56,7 +56,7 @@ function Sign() {
         <p>Enter your details below</p>
         <br /><br />
 
-        <div className="flex flex-col items-center gap-4 w-100">
+        <div className="flex flex-col items-center gap-4 w-50 lg:w-100">
           <TextField fullWidth label="Username" name="userName" value={form.userName} onChange={handleChange} />
           <TextField fullWidth label="Phone Number" name="phoneNumber" value={form.phoneNumber} onChange={handleChange} />
           <TextField fullWidth label="Email" name="email" type="email" value={form.email} onChange={handleChange} />
