@@ -68,7 +68,7 @@ export default function Layout() {
                 <InputGroupAddon align="inline-end">What are you looking for?</InputGroupAddon>
               </InputGroup>
             </div>
-            <div className='flex items-center mt-1.5'>
+            <div className='flex items-center mt-1.5 w-5 h-5'>
               <Link to="wishlist">
                 <button className='cursor-pointer' onClick={toggleLike}>
                   <img src={isLiked ? likered : likeblack} alt="" />
