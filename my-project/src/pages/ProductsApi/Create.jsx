@@ -1,10 +1,11 @@
 import {create} from "zustand"
-import { API } from "../../../url/url";
+import { API, getToken } from "../../../url/url";
 import axios from "axios";
 
 export const useTodo = create((set,get) =>({
     data:[],
     product:null,
+    cart:[],
     getData: async () =>{
        try {
         const {data} = await axios.get(`${API}/Product/get-products`)
@@ -24,5 +25,29 @@ export const useTodo = create((set,get) =>({
        } catch (error) {
         console.error(error);
        }
+    },
+   
+  addCartt: async (prod) => {
+    try {
+      const token = getToken(); 
+      await axios.post(
+        `https://store-api.softclub.tj/Cart/add-product-to-cart?id=${prod.id}`);
+      get().getCart();
+    } catch (error) {
+      console.error(error);
     }
+  },
+
+  getCart: async () => {
+  try {
+    const token = getToken()
+    const { data } = await axios.get(
+      `https://store-api.softclub.tj/Cart/get-products-from-cart`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    set({ cart: data.data })
+  } catch (error) {
+    console.error(error)
+  }
+}
 }))

@@ -12,7 +12,7 @@ import { Button } from "@mui/material"
  * @property {string} image
  */
 export default function AllProducts() {
-  const { data, getData } = useTodo()
+  const { data, getData, addCartt } = useTodo()
   const [wishlist, setWishlist] = useState([])
   const [selectedCategory, setSelectedCategory] = useState("All products")
   const [selectedBrands, setSelectedBrands] = useState([])
@@ -33,7 +33,7 @@ export default function AllProducts() {
       localStorage.getItem("wishlist") || "[]"
     )
 
-    const exists = saved.find(item => item.id === product.id)
+    const exists = saved.find(item => item.id == product.id)
 
     let updated
 
@@ -300,7 +300,7 @@ export default function AllProducts() {
                 </div>
 
                 <button
-                  onClick={() => addToCart(prod)}
+                  onClick={() => addCartt(prod)}
                   className="w-full mt-4 bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-800 transition"
                 >
                   Add to Cart
